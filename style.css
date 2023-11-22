@@ -687,7 +687,7 @@ span.text{
   height: 68vh;
   width: 100%;
   
-  background-image: url('Assests/footback.gif');
+  background-image: url('/Assests/footback.gif');
   background-size:  100% 150%  ;
   background-position:center center;
   
