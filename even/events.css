@@ -1,0 +1,403 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+  #bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+  }
+  
+
+  
+  nav {
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	right: 0;
+	top: 0;
+	padding: 0 5%;
+	height: 120px;
+	display: flex;
+}
+.logo img{
+  width: 30%;
+  margin-right: 400px;/* Adjust the margin as needed */
+  margin-top: 0px; 
+   display: block;
+}
+
+nav .links {
+	float: right;
+	padding: 0;
+	margin: 0;
+	width: 60%;
+	height: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+nav .links a:hover {
+  color: black; /* Change text color to black on hover */
+}
+
+nav .links a:hover::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 150%;
+  background-color: rgb(252, 252, 135);
+  border-radius: 10px;
+  z-index: -1;
+}
+
+nav .links a:hover::before {
+  display: block;
+}
+
+nav .links a {
+  position: relative;
+  display: inline-block;
+}
+
+nav .links a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: rgb(252, 252, 135);
+  border-radius: 10px;
+  transition: height 0.3s ease-in-out;
+}
+
+nav .links a:hover::before {
+  height: 100%;
+}
+
+
+nav .links li {
+	list-style: none;
+}
+nav .links a {
+	display: block;
+	padding: 1em;
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff;
+	text-decoration: none;
+}
+#nav-toggle {
+	position: absolute;
+	top: -100px;
+}
+nav .icon-burger {
+	display: none;
+	position: absolute;
+	right: 5%;
+	top: 50%;
+	transform: translateY(-50%);
+}
+nav .icon-burger .line {
+	width: 30px;
+	height: 5px;
+	background-color: #fff;
+	margin: 5px;
+	border-radius: 3px;
+	transition: all .3s ease-in-out;
+}
+@media screen and (max-width: 900px) {
+	.logo img{
+		height: 150px;
+		width: auto;
+    margin-top: 0px;
+    margin-left: 0px;
+	}
+
+	nav .links {
+		float: none;
+		position: fixed;
+		z-index: 9;
+		left: 0;
+		right: 0;
+		top: 100px;
+		bottom: 100%;
+		width: auto;
+		height: auto;
+		flex-direction: column;
+		justify-content: space-evenly;
+		background-color: rgba(0,0,0,.8);
+		overflow: hidden;
+		box-sizing: border-box;
+		transition: all .5s ease-in-out;
+	}
+	nav .links a {
+		font-size: 20px;
+	}
+	nav :checked ~ .links {
+		bottom: 0;
+	}
+	nav .icon-burger {
+		display: block;
+	}
+	nav :checked ~ .icon-burger .line:nth-child(1) {
+		transform: translateY(10px) rotate(225deg);
+	}
+	nav :checked ~ .icon-burger .line:nth-child(3) {
+		transform: translateY(-10px) rotate(-225deg);
+	}
+	nav :checked ~ .icon-burger .line:nth-child(2) {
+		opacity: 0;
+	}
+	
+}
+  
+  
+  #all-events {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .text-neon {
+    color: #00ff00;
+    padding-top: 20vh;
+  }
+  
+  .neon-border {
+    display: inline-block;
+    padding: 10px; /* Adjust padding as needed */
+    border-radius: 5px; /* Add border radius for a rounded border */
+    border: 2px solid transparent; /* Set initial border */
+    animation: neonBorder 1.5s infinite alternate; /* Apply the animation */
+  }
+  
+  @keyframes neonBorder {
+    0% {
+      border-width: 2px; /* Initial border width */
+      border-color: #fa0303; /* Neon green glow */
+    }
+    50% {
+      border-width: 8px; /* Increase border width */
+      border-color: #ff0000; /* Increase glow */
+    }
+    100% {
+      border-width: 2px; /* Back to initial border width */
+      border-color: #ff4000; /* Back to smaller glow */
+    }
+  }
+  
+  
+  
+  
+  
+  /* Existing styles */
+  
+  .card-list {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 100px; /* Adjust the gap between cards */
+    padding: 5vw; /* Padding around the card list */
+    margin-top: 5vh; /* Adjust margin from the content above */
+    margin-left: 5vw;
+  }
+  
+  @keyframes neon {
+    0% {
+      box-shadow: 0 0 5px #28fa03; /* Neon green glow */
+    }
+    50% {
+      box-shadow: 0 0 15px #00ff84; /* Increase glow */
+    }
+    100% {
+      box-shadow: 0 0 5px #ff4000; /* Back to smaller glow */
+    }
+  }
+  
+  .card-item {
+    /* Your existing styles */
+    flex-direction: row;
+    width: calc(33.33% - 2vw);
+    max-width: 30vw;
+    background-color: #0b0b0b;
+    border: 1px solid transparent; /* Remove default border */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2vh;
+    animation: neon 1.5s infinite; /* Apply the animation */
+  }
+  @media screen and (max-width: 768px) {
+    .card-item {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  
+  
+  .card-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .card-item p {
+    font-size: 1em;
+    color: #666;
+    line-height: 3; /* Increase line height for readability */
+  }
+  @media screen and (max-width: 600px)
+   { .card-item p
+     {
+       font-size: 0.8em; /* Reduce font size / color: #333; / Darken text color */
+       }
+       }
+  
+  .card-item img {
+    width: 100%;
+    height: 200px; /* Increase the height of the image */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .card-item {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+  cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    .card-item {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  
+  .card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  }
+  
+  .card-item:hover .card-inner {
+  transform: rotateY(180deg);
+  }
+  
+  .card-front,
+  .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  }
+  
+  /* Add these styles for the animated fire effect */
+  @keyframes fireAnimation {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
+  
+  .card-back {
+    transform: rotateY(180deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s, border 0.6s, background-position 0.6s; /* Added transition for opacity, border, and background-position */
+    border: 2px solid #050504; /* Initial border style */
+    background: linear-gradient(90deg, #2f8b01, #12c91e, rgb(160, 238, 121)); /* Fiery background gradient */
+    background-size: 200% 100%; /* Double the size for smooth animation */
+    animation: fireAnimation 2s infinite alternate; /* Apply the fire animation */
+  }
+  .card-back p {
+    color: black; 
+  }
+  
+  .card-item:hover .card-back {
+    opacity: 1;
+    pointer-events: auto;
+    border: 4px solid #95c11e; /* Border style when the card is hovered */
+    animation: none; /* Stop the pulse animation on hover */
+  }
+  .registration-form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  
+  input[type="submit"] {
+    background-color: #5ddfe3; /* Green background */
+    color: rgb(20, 139, 175);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  @media screen and (max-width: 767px) {
+    #logo {
+      margin-right: 5%; /* Adjust margin as needed */
+      margin-top: 3vh; /* Adjust margin as needed */
+    }
+  
+    #nav {
+      height: 8vh; /* Adjust height as needed */
+      padding: 0 5vw; /* Adjust padding as needed */
+      gap: 2vw; /* Adjust gap between items */
+    }
+  
+    .card-list {
+      padding: 5vw; /* Adjust padding around the card list */
+      margin-top: 5vh; /* Adjust margin from the content above */
+      margin-left: 5vw;
+    }
+  
+    .card-item {
+      width: calc(90% - 2vw); /* Increase width as needed */
+      max-width: 80vw; /* Adjust max-width as needed */
+      margin-bottom: 5vh; /* Adjust margin between cards */
+    }
+  }
