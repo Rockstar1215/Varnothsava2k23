@@ -3,13 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Registration</title>
     <style>
+   html {
+    height: 100%;
+  }
   body {
     margin:0;
     padding:0;
     font-family: sans-serif;
     
+  }
+  .user-box {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  appearance: none;
+  transition: background-color 0.3s; /* Added background-color transition */
+  background-color: transparent; /* Set background to transparent */
+  color: #03e9f4;
+  cursor: pointer;
+  outline: none;
+}
+
+select:focus {
+  background-color: #f0f8ff;
+}
+
+label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #03e9f4;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+select:valid + label,
+select:focus + label {
+  top: 5px;
+  font-size: 12px;
+  color: #03e9f4;
+}
+
+/* Highlight effect on focus */
+select:focus ~ .user-box::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  border: 2px solid #03e9f4;
+  border-radius: 7px;
+  box-shadow: 0 0 5px rgba(3, 233, 244, 0.8);
+}
+
+/* Add space between user-box elements */
+form .user-box:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+/* Add space between the last user-box and the submit button */
+form .user-box:last-child {
+  margin-bottom: 40px;
+}
+
+  
+  .logo img{
+  width: 15%;
+  margin-left: 0%;
+  margin-right: 270px;
+  margin-top: 1px; 
+  display: block;
+  z-index: 10;
   }
   
   .login-box {
@@ -71,6 +148,13 @@
     display: inline-block;
     padding: 10px 20px;
     color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
   }
   
   .login-box a:hover {
@@ -111,6 +195,9 @@
     right: 0;
     width: 2px;
     height: 100%;
+    background: linear-gradient(180deg, transparent, #03e9f4);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
   }
   
   @keyframes btn-anim2 {
@@ -146,6 +233,7 @@
             border: none;
             background: none;
             cursor: pointer;
+            margin-left: 210px;
         }
 
         .login-box form button:hover {
@@ -211,6 +299,15 @@
                 width: 80%; /* Adjust width for smaller screens */
                 padding: 20px; /* Adjust padding */
               }
+               
+              .logo img{
+                  width: 25%;
+                  margin-left: 0%;
+                  margin-right: 270px;
+                  margin-top: 1px; 
+                  display: block;
+                  z-index: 10;
+                }
               /* Adjust other styles as needed for smaller screens */
             }
             
@@ -235,18 +332,27 @@
     </style>
 </head>
 <body>
+
+
     <video autoplay muted loop id="bg-video">
-        <source src="/Assests/46.particle-wave.mp4" type="video/mp4">
+        <source src="46.particle-wave.mp4" type="video/mp4">
       </video>
+      <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+      <div id="qrcode"></div>
+      <div class="logo">
+        <a href="index.html" class="logo">
+          <img src="Assests/logo.gif" alt="logo">
+        </a>
+      </div>
     <div class="login-box">
         <h2>REGISTER</h2>
-        <form action="your_server_script_or_destination_URL_here" method="POST">
+        <form method="post" action="register.php"   >
             <div class="user-box">
                 <input type="text" name="NAME" required>
                 <label>Name</label>
             </div>
             <div class="user-box">
-                <input type="COLLEGE NAME" name="COLLEGE NAME" required>
+                <input type="text" name="COLLEGE_NAME" required>
                 <label>College Name</label>
             </div>
             <div class="user-box">
@@ -254,11 +360,64 @@
                 <label>Email</label>
             </div>
             <div class="user-box">
-                <input type="tel" name="phone-number" pattern="(\+91|0)?[0-9]{10}" required>
+                <input type="tel" name="phone_number" pattern="(\+91|0)?[0-9]{10}" required>
                 <label>phone-number</label>
             </div>
-            <button type="submit">Submit</button>
+            <div class="user-box">
+              
+              <select name="event" required>
+                <option value="" disabled selected>Select an Event</option>
+                <option value="Electro Wiz">Electro Wiz</option>
+                <option value="WattQuest">WattQuest</option>
+                <option value="CodeRush">CodeRush</option>
+                <option value="BugBane Brawl">BugBane Brawl</option>
+                <option value="TechnoQuiz">TechnoQuiz</option>
+                <option value="Robo Soccer">Robo Soccer</option>
+                <option value="Line Follower">Line Follower</option>
+                <option value="TECH-JAM">TECH-JAM</option>
+                <option value="BGMI">BGMI</option>
+              </select>
+          </div>
+            <button type="submit" onclick="generateqr()">Submit</button>
         </form>
+        <div id="qrcode" class="mt-5 text-center">
+      
+        </div>
     </div> 
-</body>
+    
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("form").addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent the form from submitting normally
+          generateqr(); // Call your function to generate QR code
+        });
+    
+        function generateqr() {
+          var name = document.querySelector('input[name="NAME"]').value;
+          var colg_name = document.querySelector('input[name="COLLEGE_NAME"]').value;
+          var email = document.querySelector('input[name="email"]').value;
+          var phone_number = document.querySelector('input[name="phone_number"]').value;
+          var selectedEvent = document.querySelector('select[name="event"]').value;
+    
+          var qrData =
+            "NAME:\n" + name + "\t\n\t\n" +
+            "COLLEGE_NAME:\n" + colg_name + "\t\n\t\n" +
+            "EMAIL:\n" + email + "\t\n\t\n" +
+            "PHONE_NUMBER:\n" + phone_number + "\t\n\t\n" +
+            "EVENT:\t\n\t\n" + selectedEvent;
+    
+          var url = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=" + encodeURIComponent(qrData);
+    
+          var ifr = `<iframe src="${url}" height="200" width="200"></iframe>`;
+    
+          document.getElementById('qrcode').innerHTML = ifr;
+        }
+      });
+    </script>
+     -->
+    
+    
+
+</body> 
 </html>
+
